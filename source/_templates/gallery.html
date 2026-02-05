@@ -1,0 +1,17 @@
+<div class="baltic-gallery">
+
+  {% for item in items %}
+  <a class="baltic-gallery-item" href="{{ item.link }}">
+    <div class="baltic-gallery-thumb">
+      <img src="{{ item.image }}" alt="{{ item.title }}">
+      <div class="baltic-gallery-overlay">
+        <div class="baltic-gallery-title">{{ item.title }}</div>
+        {% if item.subtitle %}
+        <div class="baltic-gallery-subtitle">{{ item.subtitle }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+
+</div>

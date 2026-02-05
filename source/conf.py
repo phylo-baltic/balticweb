@@ -1,0 +1,61 @@
+# Configuration file for the Sphinx documentation builder.
+
+# -- Image import path
+
+import os
+html_extra_path = [
+    name for name in os.listdir(".")
+    if os.path.isdir(name) and name not in ["_static", "_templates"]
+]
+
+# -- Project information -----------------------------------------------------
+
+project = 'baltic'
+author = 'mft'
+copyright = '2025'
+release = '1'
+
+# -- General configuration ---------------------------------------------------
+
+extensions = []
+
+templates_path = ['_templates']
+exclude_patterns = []
+
+# -- HTML output -------------------------------------------------------------
+
+html_theme = 'pydata_sphinx_theme'
+html_static_path = ['_static']
+
+# --- CSS: Only custom styling you actually need ----------------------------
+html_css_files = [
+    'css/normalize.css',
+    # 'css/landing.css',
+    'css/style.css',
+    'vendor/fontawesome/6.5.2/css/all.min.css',  # FontAwesome icons
+]
+
+# --- JS: ONLY custom homepage JS, NOTHING from Sphinx/theme -----------------
+html_js_files = [
+    'images-rotate-info.js',
+    'script.js',
+]
+
+# Theme options
+html_theme_options = {
+    "logo": {"text": "baltic website"},
+    "secondary_sidebar_items": {
+        "index": [],  # no secondary (right) sidebar on homepage
+        "**": ["page-toc", "edit-this-page", "sourcelink"],
+    },
+}
+
+html_sidebars = {
+    "index": [],   # no primary (left) sidebar on homepage
+}
+
+html_context = {}
+
+html_additional_pages = {
+    "index": "index.html",
+}

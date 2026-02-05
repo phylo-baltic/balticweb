@@ -1,0 +1,15 @@
+Frequency Plots
+===============
+
+Lineage Frequency
+
+.. raw:: html
+
+    <div class="gallery-grid">
+
+        <a class="gallery-item" href="advanced-muller-raw.html">
+            <img src="advanced-muller-raw.png" alt="Advanced Muller plot"/>
+            <span>Advanced Muller Plots</span>
+        </a>
+
+    </div>

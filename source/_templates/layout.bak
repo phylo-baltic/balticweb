@@ -1,0 +1,65 @@
+{% extends "!layout.html" %}
+
+
+{# --- FOOTER OVERRIDE --- #}
+{% block footer %}
+<!-- your custom footer HTML goes here -->
+<footer class="footer-section">
+  <div class="grid__mpl-info">
+    <h1>Matplotlib</h1>
+    <ul class="social fas">
+      <li>
+        <a href="https://github.com/matplotlib/matplotlib" aria-label="Matplotlib on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="social__twitter">
+        <a href="https://twitter.com/matplotlib" aria-label="Matplotlib on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+    <a
+      href="https://numfocus.org/donate-to-matplotlib"
+      class="button button--green"
+      >Donate to Matplotlib</a>
+
+    <p class="copywrite">© 2012 – 2025 The Matplotlib development team</p>
+  </div>
+
+  <ul class="mpl-links grid__mpl-links">
+    <li><a href="https://blog.scientific-python.org/tags/matplotlib/">Matplotblog</a></li>
+    <li>
+      <a
+        href="https://matplotlib.org/stable/project/code_of_conduct.html"
+        >Code of Conduct</a>
+    </li>
+    <li>
+      <a href="https://matplotlib.org/stable/project/license.html">License</a>
+    </li>
+    <li>
+      <a href="https://matplotlib.org/governance/">Governance</a>
+    </li>
+    <li>
+      <a href="https://numfocus.org/sponsored-projects"
+        >NumFOCUS Fiscally Sponsored Project</a>
+    </li>
+  </ul>
+
+  <ul class="release-docs grid__release-docs">
+    <dl class="release">
+      <dt>Latest Stable Release</dt>
+      <dd>
+        <a href="https://matplotlib.org/stable">docs</a> |
+        <a href="https://matplotlib.org/stable/users/release_notes.html">changelog</a>
+      </dd>
+
+      <dt>Development version</dt>
+      <dd>
+        <a href="https://matplotlib.org/devdocs/index.html">docs</a>
+      </dd>
+    </dl>
+  </ul>
+</footer>
+
+{% endblock footer %}
