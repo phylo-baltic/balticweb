@@ -1,0 +1,115 @@
+source/baltic-examples/
+├── Ebola
+│   ├── Makona_1610_cds_ig.GLM.MCC.tree
+│   ├── Makona_1610_cds_ig.GLM.tmrcas
+│   ├── README.md
+│   ├── exploded-tree-high-level.png
+│   ├── exploded-tree-high-level.py
+│   ├── exploded-tree-low-level.png
+│   ├── exploded-tree-low-level.py
+│   ├── height-95HPD-bars.png
+│   ├── height-95HPD-bars.py
+│   ├── simple-tree.png
+│   ├── simple-tree.py
+│   ├── state-collapsed-tree-earliest-adjust.png
+│   ├── state-collapsed-tree-earliest-adjust.py
+│   ├── state-collapsed-tree-earliest.png
+│   ├── state-collapsed-tree-earliest.py
+│   ├── state-collapsed-tree.png
+│   ├── state-collapsed-tree.py
+│   ├── tmrca-hpd-tree.png
+│   └── tmrca-hpd-tree.py
+├── Influenza-B-virus
+│   ├── InfB_HA_subtypes.txt
+│   ├── InfB_HAt_ALLs1.mcc.tre
+│   ├── InfB_M1t_ALLs1.mcc.tre
+│   ├── InfB_MP_subtypes.txt
+│   ├── InfB_NA_subtypes.txt
+│   ├── InfB_NAt_ALLs1.mcc.tre
+│   ├── InfB_NP_subtypes.txt
+│   ├── InfB_NPt_ALLs1.mcc.tre
+│   ├── InfB_NS1t_ALLs1.mcc.tre
+│   ├── InfB_NS_subtypes.txt
+│   ├── InfB_PA_subtypes.txt
+│   ├── InfB_PAt_ALLs1.mcc.tre
+│   ├── InfB_PB1_subtypes.txt
+│   ├── InfB_PB1t_ALLs1.mcc.tre
+│   ├── InfB_PB2_subtypes.txt
+│   ├── InfB_PB2t_ALLs1.mcc.tre
+│   ├── README.md
+│   ├── tangled-chain.png
+│   ├── tangled-chain.py
+│   ├── tree-matrix.png
+│   └── tree-matrix.py
+├── LICENSE
+├── MERS-CoV
+│   ├── MERS-CoV.85.CFM.ML_sequence.fasta
+│   ├── MERS-CoV.85.CFM.labelled_tree.newick
+│   ├── MERS-CoV.85.CFM.position_cross_reference.txt
+│   ├── MERS.mcc.tree
+│   ├── README.md
+│   ├── camel_skygrid.combined.log
+│   ├── exploded-tree-high-level.png
+│   ├── exploded-tree-high-level.py
+│   ├── exploded-tree-low-level.png
+│   ├── exploded-tree-low-level.py
+│   ├── gradient-clade.png
+│   ├── gradient-clade.py
+│   ├── height-95HPD-bars.png
+│   ├── height-95HPD-bars.py
+│   ├── homoplasy-tree.png
+│   ├── homoplasy-tree.py
+│   ├── reduced-tree-camel.png
+│   ├── reduced-tree-camel.py
+│   ├── reduced-tree-human.png
+│   ├── reduced-tree-human.py
+│   ├── simple-tree.png
+│   ├── simple-tree.py
+│   ├── skygrid-calendar-time.png
+│   ├── skygrid-calendar-time.py
+│   ├── skygrid-relative-time.png
+│   ├── skygrid-relative-time.py
+│   ├── state-collapsed-tree-earliest-adjust.png
+│   ├── state-collapsed-tree-earliest-adjust.py
+│   ├── state-collapsed-tree.png
+│   └── state-collapsed-tree.py
+├── README.md
+├── SARS-CoV-2
+│   ├── NC_045512.gb
+│   ├── README.md
+│   ├── SARS-CoV-2.aln.fasta
+│   ├── SARS-CoV-2.aln.newick
+│   ├── annotations.gff
+│   ├── latest_country_mcc.tre
+│   ├── snp-alignment.png
+│   ├── snp-alignment.py
+│   ├── travel-aware-tree.png
+│   └── travel-aware-tree.py
+├── WuMV-6
+│   ├── NP.rooted.newick
+│   ├── PA.rooted.newick
+│   ├── PB1-wmv6-93.treefile
+│   ├── PB1.rooted.newick
+│   ├── PB2.rooted.newick
+│   ├── README.md
+│   ├── genome.network.combined.mcc.tree
+│   ├── genome.network.tmrcas.txt
+│   ├── gp64.rooted.newick
+│   ├── hypothetical.rooted.newick
+│   ├── hypothetical2.rooted.newick
+│   ├── hypothetical3.rooted.newick
+│   ├── map-tree.png
+│   ├── map-tree.py
+│   ├── reassortment-network.png
+│   ├── reassortment-network.py
+│   ├── tangled-chain.png
+│   ├── tangled-chain.py
+│   ├── tree-matrix.png
+│   └── tree-matrix.py
+└── Zika-virus
+    ├── README.md
+    ├── root-to-tip.png
+    ├── root-to-tip.py
+    └── zika.nwk
+
+7 directories, 106 files

@@ -2,11 +2,12 @@
 
 # -- Image import path
 
-import os
-html_extra_path = [
-    name for name in os.listdir(".")
-    if os.path.isdir(name) and name not in ["_static", "_templates"]
-]
+#import os
+#html_extra_path = [
+#    name for name in os.listdir(".")
+#    if os.path.isdir(name) and name not in ["_static", "_templates"]
+#]
+html_extra_path = []
 
 # -- Project information -----------------------------------------------------
 
@@ -32,22 +33,32 @@ html_css_files = [
     'css/normalize.css',
     # 'css/landing.css',
     'css/style.css',
+    'css/examples-grid.css',
     'vendor/fontawesome/6.5.2/css/all.min.css',  # FontAwesome icons
 ]
 
 # --- JS: ONLY custom homepage JS, NOTHING from Sphinx/theme -----------------
 html_js_files = [
     'images-rotate-info.js',
+    'js/examples-grid.js',
     'script.js',
 ]
 
 # Theme options
+source_suffix = {
+    ".rst": "restructuredtext"
+    #".md": "markdown",
+}
+
 html_theme_options = {
     "logo": {"text": "baltic website"},
     "secondary_sidebar_items": {
         "index": [],  # no secondary (right) sidebar on homepage
         "**": ["page-toc", "edit-this-page", "sourcelink"],
     },
+    "show_nav_level": 0,        # only show captions
+    "collapse_navigation": True,
+    "navigation_depth": 1,      # captions -> pages (your grandchildren) are depth 1
 }
 
 html_sidebars = {

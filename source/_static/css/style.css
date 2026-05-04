@@ -91,6 +91,33 @@
   display: none !important;
 }
 
+@media (min-width: 992px) { /* ~Bootstrap lg */
+    /* left sidebar */
+  .bd-sidebar-primary {
+    flex: 0 0 15% !important;
+    max-width: 15% !important;
+  }
+
+  /* main content column */
+  main.bd-main {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+  }
+
+  /* right sidebar */
+  .bd-sidebar-secondary {
+    flex: 0 0 8% !important;
+    max-width: 8% !important;
+  }
+
+  /* keep your "full width" overrides (theme docs recommend these) */
+  .bd-page-width {
+    max-width: 100% !important;
+  }
+  .bd-main .bd-content .bd-article-container {
+    max-width: 100% !important;
+  }
+}
 
 /* ============================
    Gallery Grid (like matplotlib.org)
