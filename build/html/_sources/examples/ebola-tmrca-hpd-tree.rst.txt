@@ -1,9 +1,15 @@
 tmrca hpd tree
 ==============
 
-.. image:: /_static/examples/ebola/tmrca-hpd-tree.png
+.. image:: ../_static/examples/ebola/tmrca-hpd-tree.png
    :alt: tmrca-hpd-tree
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/tmrca-hpd-tree.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -37,7 +43,7 @@ Code
    colourFxn = lambda k: colours[admin2country[k.traits[traitName]]]
 
 
-   ll=bt.io.load_nexus('/mnt/c/Users/evogytis/repos/baltic-examples/Ebola/Makona_1610_cds_ig.GLM.MCC.tree', 'time') ## treeFile here can alternatively be a path to a local file
+   ll=bt.io.load_nexus('Makona_1610_cds_ig.GLM.MCC.tree', 'time') ## treeFile here can alternatively be a path to a local file
    ll.treeStats() ## report stats about tree
 
    ################# processing
@@ -159,4 +165,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2013-12-01'), bt_utils.calendar_to_decimal_date('2014-09-01'))
    ax.set_ylim(-10, ll.ySpan)
 
-   plt.savefig('tmrca-hpd-tree.png', bbox_inches='tight')\n
+   plt.savefig('tmrca-hpd-tree.png', bbox_inches='tight')

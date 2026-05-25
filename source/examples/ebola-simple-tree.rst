@@ -1,9 +1,15 @@
 simple tree
 ===========
 
-.. image:: /_static/examples/ebola/simple-tree.png
+.. image:: ../_static/examples/ebola/simple-tree.png
    :alt: simple-tree
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/simple-tree.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -56,4 +62,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2014-01-01'), bt_utils.calendar_to_decimal_date('2015-11-01'))
    ax.set_ylim(-5, ll.ySpan + 5)
 
-   plt.savefig('simple-tree.png', bbox_inches='tight')\n
+   plt.savefig('simple-tree.png', bbox_inches='tight')

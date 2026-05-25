@@ -1,9 +1,15 @@
 reassortment network
 ====================
 
-.. image:: /_static/examples/wumv-6/reassortment-network.png
+.. image:: ../_static/examples/wumv-6/reassortment-network.png
    :alt: reassortment-network
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/wumv-6/reassortment-network.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -79,4 +85,4 @@ Code
 
    ax.tick_params(labelsize=20)
 
-   plt.savefig('reassortment-network.png', bbox_inches='tight')\n
+   plt.savefig('reassortment-network.png', bbox_inches='tight')

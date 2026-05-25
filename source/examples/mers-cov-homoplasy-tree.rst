@@ -1,9 +1,15 @@
 homoplasy tree
 ==============
 
-.. image:: /_static/examples/mers-cov/homoplasy-tree.png
+.. image:: ../_static/examples/mers-cov/homoplasy-tree.png
    :alt: homoplasy-tree
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/homoplasy-tree.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -120,4 +126,4 @@ Code
    bt_utils.plot_scale_bar(ax, xy=(0.0005, 50), tree=ll, style='fancy', fancyWidth=400, textKwargs={'fontsize': 16})
    ax.set_ylim(0, ll.ySpan)
 
-   plt.savefig('homoplasy-tree.png', bbox_inches='tight')\n
+   plt.savefig('homoplasy-tree.png', bbox_inches='tight')

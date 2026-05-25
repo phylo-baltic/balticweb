@@ -1,9 +1,15 @@
 exploded tree high level
 ========================
 
-.. image:: /_static/examples/ebola/exploded-tree-high-level.png
+.. image:: ../_static/examples/ebola/exploded-tree-high-level.png
    :alt: exploded-tree-high-level
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/exploded-tree-high-level.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -63,4 +69,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2014-01-01'), bt_utils.calendar_to_decimal_date('2015-11-01'))
    ax.set_ylim(-5, ll.ySpan + 320) ## need to guess y-axis limits
 
-   plt.savefig('exploded-tree-high-level.png', bbox_inches='tight')\n
+   plt.savefig('exploded-tree-high-level.png', bbox_inches='tight')

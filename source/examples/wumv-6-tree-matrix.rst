@@ -1,9 +1,15 @@
 tree matrix
 ===========
 
-.. image:: /_static/examples/wumv-6/tree-matrix.png
+.. image:: ../_static/examples/wumv-6/tree-matrix.png
    :alt: tree-matrix
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/wumv-6/tree-matrix.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -68,4 +74,4 @@ Code
    bt_utils.clean_axes(ax)
    bt_utils.clean_axes(ax2, removeTickLabels='y')
 
-   plt.savefig('tree-matrix.png', bbox_inches='tight')\n
+   plt.savefig('tree-matrix.png', bbox_inches='tight')

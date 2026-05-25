@@ -1,9 +1,15 @@
 exploded tree low level
 =======================
 
-.. image:: /_static/examples/ebola/exploded-tree-low-level.png
+.. image:: ../_static/examples/ebola/exploded-tree-low-level.png
    :alt: exploded-tree-low-level
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/exploded-tree-low-level.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -72,4 +78,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2014-01-01'), bt_utils.calendar_to_decimal_date('2015-11-01'))
    ax.set_ylim(-5, yOffset+2)
 
-   plt.savefig('exploded-tree-low-level.png', bbox_inches='tight')\n
+   plt.savefig('exploded-tree-low-level.png', bbox_inches='tight')

@@ -1,9 +1,15 @@
 height 95HPD bars
 =================
 
-.. image:: /_static/examples/ebola/height-95HPD-bars.png
+.. image:: ../_static/examples/ebola/height-95HPD-bars.png
    :alt: height-95HPD-bars
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/height-95HPD-bars.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -72,4 +78,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2014-01-01'), bt_utils.calendar_to_decimal_date('2015-12-01'))
    ax.set_ylim(0, pt.ySpan)
 
-   plt.savefig('height-95HPD-bars.png', bbox_inches='tight')\n
+   plt.savefig('height-95HPD-bars.png', bbox_inches='tight')

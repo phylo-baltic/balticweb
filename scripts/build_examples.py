@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import re
+import json
+from html import escape
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -15,6 +17,8 @@ STATIC_EXAMPLES = SPHINX_SOURCE / "_static" / "examples"             # output im
 DESC_FILE = SPHINX_SOURCE / "_data" / "examples_description.txt"     # manual text
 
 IMG_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
+SOURCE_EXTS = {".py", ".ipynb"}
+MANIFEST_FILE = EXAMPLES_DOCS / ".build_examples_manifest.json"
 
 
 def slugify(s: str) -> str:
@@ -33,7 +37,7 @@ def read_text(p: Path) -> str:
     return p.read_text(encoding="utf-8").strip()
 
 
-def safe_read_code(p: Path, max_chars: int = 200_000) -> str:
+def safe_read_text(p: Path, max_chars: int = 200_000) -> str:
     try:
         txt = p.read_text(encoding="utf-8")
     except UnicodeDecodeError:
@@ -48,142 +52,193 @@ def indent(text: str, spaces: int) -> str:
     return "\n".join(pad + line if line.strip() else line for line in text.splitlines())
 
 
+def is_hidden_path(path: Path) -> bool:
+    return any(part.startswith(".") for part in path.parts)
+
+
+def html_src(static_path: str) -> str:
+    return f"../{static_path}"
+
+
+def rst_static_path(static_path: str) -> str:
+    return f"../{static_path}"
+
+
+def notebook_code(path: Path, max_chars: int = 200_000) -> str:
+    try:
+        notebook = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        return f"# Could not read notebook source: {exc}\n"
+
+    code_cells: list[str] = []
+    for cell in notebook.get("cells", []):
+        if cell.get("cell_type") != "code":
+            continue
+        source = cell.get("source", "")
+        if isinstance(source, list):
+            source = "".join(source)
+        if source.strip():
+            code_cells.append(source.rstrip())
+
+    code = "\n\n# %%\n\n".join(code_cells)
+    if not code:
+        code = "# This notebook does not contain Python code cells.\n"
+    if len(code) > max_chars:
+        code = code[:max_chars] + "\n# ... truncated ...\n"
+    return code
+
+
+def read_source_code(path: Path) -> str:
+    if path.suffix.lower() == ".ipynb":
+        return notebook_code(path)
+    return safe_read_text(path)
+
+
+def title_from_stem(stem: str) -> str:
+    return stem.replace("-", " ").replace("_", " ")
+
+
+def find_matching_image(source: Path) -> Path | None:
+    for ext in (".png", ".jpg", ".jpeg", ".webp"):
+        candidate = source.with_suffix(ext)
+        if candidate.exists():
+            return candidate
+
+    source_stem = source.stem.lower()
+    images = [
+        p for p in source.parent.iterdir()
+        if p.is_file() and p.suffix.lower() in IMG_EXTS and p.stem.lower() == source_stem
+    ]
+    return sorted(images, key=lambda p: p.name.lower())[0] if images else None
+
+
+def copy_static_file(source: Path, relative_parent: Path) -> str:
+    parent_slug = "-".join(slugify(part) for part in relative_parent.parts)
+    if not parent_slug:
+        parent_slug = "root"
+
+    out_dir = STATIC_EXAMPLES / parent_slug
+    ensure_dir(out_dir)
+
+    dest = out_dir / source.name
+    shutil.copy2(source, dest)
+    return f"_static/examples/{parent_slug}/{source.name}"
+
+
+def unique_doc_slug(base_slug: str, used: set[str]) -> str:
+    candidate = base_slug
+    counter = 2
+    while candidate in used:
+        candidate = f"{base_slug}-{counter}"
+        counter += 1
+    used.add(candidate)
+    return candidate
+
+
 @dataclass
 class ExampleItem:
     category_name: str
     category_slug: str
+    relative_parent: Path
     example_name: str
     example_slug: str
     img_web: str | None          # _static/examples/<cat>/<file>.png
+    source_web: str              # _static/examples/<cat>/<file>.py or .ipynb
+    source_suffix: str
     rst_doc: str                 # <cat>/<example>
     html_href: str               # <cat>/<example>.html
+    source_path: Path
 
 
 def collect_items() -> tuple[list[ExampleItem], dict[str, list[ExampleItem]]]:
     items: list[ExampleItem] = []
     by_cat: dict[str, list[ExampleItem]] = {}
+    used_doc_slugs: set[str] = set()
 
     if not EXAMPLES_SRC.exists():
         raise SystemExit(f"Missing input folder: {EXAMPLES_SRC}")
 
-    categories = sorted([p for p in EXAMPLES_SRC.iterdir() if p.is_dir()], key=lambda p: p.name.lower())
+    sources = [
+        p for p in EXAMPLES_SRC.rglob("*")
+        if p.is_file()
+        and p.suffix.lower() in SOURCE_EXTS
+        and not is_hidden_path(p.relative_to(EXAMPLES_SRC))
+    ]
+    sources.sort(key=lambda p: p.relative_to(EXAMPLES_SRC).as_posix().lower())
 
-    for cat_dir in categories:
-        cat_name = cat_dir.name
-        cat_slug = slugify(cat_name)
+    for source in sources:
+        rel = source.relative_to(EXAMPLES_SRC)
+        relative_parent = rel.parent
+        category_name = rel.parts[0] if len(rel.parts) > 1 else "Examples"
+        category_slug = slugify(category_name)
+        example_name = source.stem
+        example_slug = slugify(example_name)
 
-        # Expect example files inside category: <example>.py and <example>.png
-        py_files = sorted(cat_dir.glob("*.py"), key=lambda p: p.name.lower())
+        slug_parts = [slugify(part) for part in rel.with_suffix("").parts]
+        doc_slug = unique_doc_slug("-".join(slug_parts), used_doc_slugs)
 
-        for py in py_files:
-            ex_name = py.stem
-            ex_slug = slugify(ex_name)
+        img = find_matching_image(source)
+        img_web = copy_static_file(img, relative_parent) if img else None
+        source_web = copy_static_file(source, relative_parent)
 
-            # image with same stem (png preferred)
-            img = None
-            for ext in (".png", ".jpg", ".jpeg", ".webp"):
-                cand = cat_dir / f"{ex_name}{ext}"
-                if cand.exists():
-                    img = cand
-                    break
-
-            img_web = None
-            if img and img.suffix.lower() in IMG_EXTS:
-                out_img_dir = STATIC_EXAMPLES / cat_slug
-                ensure_dir(out_img_dir)
-                dest = out_img_dir / img.name
-                shutil.copy2(img, dest)
-                img_web = f"_static/examples/{cat_slug}/{img.name}"
-
-            # it = ExampleItem(
-            #     category_name=cat_name,
-            #     category_slug=cat_slug,
-            #     example_name=ex_name,
-            #     example_slug=ex_slug,
-            #     img_web=img_web,
-            #     # rst_doc=f"{cat_slug}/{ex_slug}",
-            #     # html_href=f"{cat_slug}/{ex_slug}.html",
-            #     rst_doc=f"{ex_slug}",
-            #     html_href=f"{ex_slug}.html",
-            # )
-            doc_slug = f"{cat_slug}-{ex_slug}"
-
-            it = ExampleItem(
-                category_name=cat_name,
-                category_slug=cat_slug,
-                example_name=ex_name,
-                example_slug=ex_slug,
-                img_web=img_web,
-                rst_doc=doc_slug,
-                html_href=f"{doc_slug}.html",
-            )
-            items.append(it)
-            by_cat.setdefault(cat_slug, []).append(it)
+        it = ExampleItem(
+            category_name=category_name,
+            category_slug=category_slug,
+            relative_parent=relative_parent,
+            example_name=example_name,
+            example_slug=example_slug,
+            img_web=img_web,
+            source_web=source_web,
+            source_suffix=source.suffix.lower(),
+            rst_doc=doc_slug,
+            html_href=f"{doc_slug}.html",
+            source_path=source,
+        )
+        items.append(it)
+        by_cat.setdefault(category_slug, []).append(it)
 
     # stable ordering
     for k in by_cat:
-        by_cat[k].sort(key=lambda x: x.example_name.lower())
+        by_cat[k].sort(key=lambda x: x.source_path.relative_to(EXAMPLES_SRC).as_posix().lower())
 
     return items, by_cat
 
 
 def write_example_page(item: ExampleItem) -> None:
-    # cat_dir = EXAMPLES_DOCS / item.category_slug
-    # ensure_dir(cat_dir)
     ensure_dir(EXAMPLES_DOCS)
 
-
-    # input .py path
-    py_path = EXAMPLES_SRC / item.category_name / f"{item.example_name}.py"
-    code = safe_read_code(py_path)
+    code = read_source_code(item.source_path)
 
     hero = item.img_web or "_static/no_image.png"
+    source_kind = "Notebook" if item.source_suffix == ".ipynb" else "Python source"
+    download_label = escape(f"Download {source_kind.lower()}")
 
-    title = item.example_name.replace("-", " ")
+    title = title_from_stem(item.example_name)
     underline = "=" * len(title)
+    indented_code = indent(code.rstrip() + "\n", 3)
 
     rst = f"""\
 {title}
 {underline}
 
-.. image:: /{hero}
+.. image:: {rst_static_path(hero)}
    :alt: {item.example_name}
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="{html_src(item.source_web)}" download>{download_label}</a>
+   </p>
 
 Code
 ----
 
 .. code-block:: python
 
-{indent(code.rstrip() + "\\n", 3)}
+{indented_code}
 """
-    # (cat_dir / f"{item.example_slug}.rst").write_text(rst, encoding="utf-8")
-    # (EXAMPLES_DOCS / f"{item.example_slug}.rst").write_text(rst, encoding="utf-8")
     (EXAMPLES_DOCS / f"{item.rst_doc}.rst").write_text(rst, encoding="utf-8")
-
-
-def write_category_index(cat_slug: str, cat_items: list[ExampleItem], cat_name: str) -> None:
-    # Optional: category landing page (you can keep it minimal or hide it)
-    cat_dir = EXAMPLES_DOCS / cat_slug
-    ensure_dir(cat_dir)
-
-    title = cat_name
-    underline = "=" * len(title)
-
-    # Hidden toctree of examples within category
-    entries = "\n".join(f"   {it.example_slug}" for it in cat_items)
-
-    rst = f"""\
-{title}
-{underline}
-
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-
-{entries}
-"""
-    (cat_dir / "index.rst").write_text(rst, encoding="utf-8")
 
 
 def write_examples_landing(by_cat: dict[str, list[ExampleItem]], items: list[ExampleItem]) -> None:
@@ -202,13 +257,17 @@ def write_examples_landing(by_cat: dict[str, list[ExampleItem]], items: list[Exa
         cards: list[str] = []
         for it in cat_items:
             img = it.img_web or "_static/no_image.png"
+            title = escape(title_from_stem(it.example_name))
+            alt = escape(it.example_name, quote=True)
+            href = escape(it.html_href, quote=True)
+            src = escape(html_src(img), quote=True)
             cards.append(
                 f"""
-<a class="gallery-card" href="{it.html_href}">
+<a class="gallery-card" href="{href}">
   <div class="gallery-card__imgwrap">
-    <img src="/{img}" alt="{it.example_name}">
+    <img src="{src}" alt="{alt}" loading="lazy">
     <div class="gallery-card__overlay">
-      <div class="gallery-card__title">{it.example_name}</div>
+      <div class="gallery-card__title">{title}</div>
     </div>
   </div>
 </a>
@@ -217,7 +276,7 @@ def write_examples_landing(by_cat: dict[str, list[ExampleItem]], items: list[Exa
 
         section = f"""
 <section class="examples-section">
-  <h2 class="examples-section__title">{cat_name}</h2>
+  <h2 class="examples-section__title">{escape(cat_name)}</h2>
   <div class="gallery-grid">
     {''.join(cards)}
   </div>
@@ -266,29 +325,53 @@ def write_examples_landing(by_cat: dict[str, list[ExampleItem]], items: list[Exa
 """
     (EXAMPLES_DOCS / "index.rst").write_text(rst, encoding="utf-8")
 
-def main() -> None:
-    items, by_cat = collect_items()
 
-    # clean output docs folder (optional: you can comment this out if you prefer)
+def clean_previous_outputs() -> None:
+    if not MANIFEST_FILE.exists():
+        return
+
+    try:
+        manifest = json.loads(MANIFEST_FILE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return
+
+    for rel_path in manifest.get("generated", []):
+        path = PROJECT_ROOT / rel_path
+        if path.exists() and path.is_file():
+            path.unlink()
+
+
+def write_manifest(items: list[ExampleItem]) -> None:
+    generated = [EXAMPLES_DOCS / "index.rst"]
+    generated.extend(EXAMPLES_DOCS / f"{item.rst_doc}.rst" for item in items)
+    generated.extend(STATIC_EXAMPLES / Path(item.source_web).relative_to("_static/examples") for item in items)
+    generated.extend(
+        STATIC_EXAMPLES / Path(item.img_web).relative_to("_static/examples")
+        for item in items
+        if item.img_web
+    )
+
+    rel_paths = sorted({path.relative_to(PROJECT_ROOT).as_posix() for path in generated})
+    MANIFEST_FILE.write_text(json.dumps({"generated": rel_paths}, indent=2) + "\n", encoding="utf-8")
+
+def main() -> None:
     ensure_dir(EXAMPLES_DOCS)
     ensure_dir(STATIC_EXAMPLES)
+    clean_previous_outputs()
+
+    items, by_cat = collect_items()
 
     # write pages
     for it in items:
         write_example_page(it)
 
-    # write per-category index.rst (optional but recommended)
-    # for cat_slug, cat_items in by_cat.items():
-    #     cat_name = cat_items[0].category_name if cat_items else cat_slug
-    #     write_category_index(cat_slug, cat_items, cat_name)
-
     # write landing page
     write_examples_landing(by_cat, items)
+    write_manifest(items)
 
     print(f"Generated {len(by_cat)} categories, {len(items)} example pages.")
     print(f"- Landing: {EXAMPLES_DOCS / 'index.rst'}")
-    print(f"- Category dirs: {EXAMPLES_DOCS}/<category>/")
-    print(f"- Images: {STATIC_EXAMPLES}/<category>/*")
+    print(f"- Static files: {STATIC_EXAMPLES}/<source-folder>/*")
 
 
 if __name__ == "__main__":

@@ -1,9 +1,15 @@
 tangled chain
 =============
 
-.. image:: /_static/examples/influenza-b-virus/tangled-chain.png
+.. image:: ../_static/examples/influenza-b-virus/tangled-chain.png
    :alt: tangled-chain
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/influenza-b-virus/tangled-chain.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -58,4 +64,4 @@ Code
 
    clean_axes(ax)
 
-   plt.savefig('tangled-chain.png', bbox_inches='tight')\n
+   plt.savefig('tangled-chain.png', bbox_inches='tight')

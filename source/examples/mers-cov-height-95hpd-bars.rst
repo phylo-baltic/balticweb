@@ -1,9 +1,15 @@
 height 95HPD bars
 =================
 
-.. image:: /_static/examples/mers-cov/height-95HPD-bars.png
+.. image:: ../_static/examples/mers-cov/height-95HPD-bars.png
    :alt: height-95HPD-bars
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/height-95HPD-bars.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -60,4 +66,4 @@ Code
 
    ax.tick_params(axis='x', labelsize=22)
 
-   plt.savefig('height-95HPD-bars.png', bbox_inches='tight')\n
+   plt.savefig('height-95HPD-bars.png', bbox_inches='tight')

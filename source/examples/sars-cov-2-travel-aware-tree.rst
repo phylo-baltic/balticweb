@@ -1,9 +1,15 @@
 travel aware tree
 =================
 
-.. image:: /_static/examples/sars-cov-2/travel-aware-tree.png
+.. image:: ../_static/examples/sars-cov-2/travel-aware-tree.png
    :alt: travel-aware-tree
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/sars-cov-2/travel-aware-tree.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -54,4 +60,4 @@ Code
    bt_utils.plot_time_grid(ax, calendarTimeline)
 
    ax.tick_params(labelsize=16)
-   plt.savefig('travel-aware-tree.png', bbox_inches='tight')\n
+   plt.savefig('travel-aware-tree.png', bbox_inches='tight')

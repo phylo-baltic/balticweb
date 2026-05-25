@@ -1,9 +1,15 @@
 gradient clade
 ==============
 
-.. image:: /_static/examples/mers-cov/gradient-clade.png
+.. image:: ../_static/examples/mers-cov/gradient-clade.png
    :alt: gradient-clade
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/gradient-clade.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -21,7 +27,7 @@ Code
    mpl.use("Agg")
 
    #################
-   ll=bt.io.load_nexus('/mnt/c/Users/evogytis/repos/baltic-examples/MERS-CoV/MERS.mcc.tree', 'time') ## treeFile here can alternatively be a path to a local file
+   ll=bt.io.load_nexus('MERS.mcc.tree', 'time') ## treeFile here can alternatively be a path to a local file
    ll.treeStats() ## report stats about tree
 
    ll.sort_branches()
@@ -54,4 +60,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2010-01-01'), bt_utils.calendar_to_decimal_date('2015-10-01'))
    ax.set_ylim(-1, ll.ySpan+1)
 
-   plt.savefig('gradient-clade.png', bbox_inches='tight')\n
+   plt.savefig('gradient-clade.png', bbox_inches='tight')

@@ -1,9 +1,15 @@
 skygrid relative time
 =====================
 
-.. image:: /_static/examples/mers-cov/skygrid-relative-time.png
+.. image:: ../_static/examples/mers-cov/skygrid-relative-time.png
    :alt: skygrid-relative-time
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/skygrid-relative-time.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -35,4 +41,4 @@ Code
    ax.set_ylabel(r'$N_{e}\tau$', size=20)
    ax.set_xlabel('time', size=14)
 
-   plt.savefig('skygrid-relative-time.png', bbox_inches='tight')\n
+   plt.savefig('skygrid-relative-time.png', bbox_inches='tight')

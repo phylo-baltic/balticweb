@@ -1,9 +1,15 @@
 root to tip
 ===========
 
-.. image:: /_static/examples/zika-virus/root-to-tip.png
+.. image:: ../_static/examples/zika-virus/root-to-tip.png
    :alt: root-to-tip
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/zika-virus/root-to-tip.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -48,4 +54,4 @@ Code
 
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2013-10-01'), bt_utils.calendar_to_decimal_date('2018-02-01'))
 
-   plt.savefig('root-to-tip.png', bbox_inches='tight')\n
+   plt.savefig('root-to-tip.png', bbox_inches='tight')

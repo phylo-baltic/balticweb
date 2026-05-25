@@ -1,9 +1,15 @@
 state collapsed tree earliest adjust
 ====================================
 
-.. image:: /_static/examples/mers-cov/state-collapsed-tree-earliest-adjust.png
+.. image:: ../_static/examples/mers-cov/state-collapsed-tree-earliest-adjust.png
    :alt: state-collapsed-tree-earliest-adjust
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/state-collapsed-tree-earliest-adjust.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -76,4 +82,4 @@ Code
    ax3.set_yticklabels(['human', 'camel'])
    ax3.tick_params(size=0, labelsize=18)
 
-   plt.savefig('state-collapsed-tree-earliest-adjust.png', bbox_inches='tight')\n
+   plt.savefig('state-collapsed-tree-earliest-adjust.png', bbox_inches='tight')

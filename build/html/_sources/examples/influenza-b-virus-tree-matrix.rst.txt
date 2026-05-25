@@ -1,9 +1,15 @@
 tree matrix
 ===========
 
-.. image:: /_static/examples/influenza-b-virus/tree-matrix.png
+.. image:: ../_static/examples/influenza-b-virus/tree-matrix.png
    :alt: tree-matrix
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/influenza-b-virus/tree-matrix.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -53,4 +59,4 @@ Code
    bt_utils.clean_axes(ax, hideSpines=['left', 'top', 'right'], removeTickLabels='y') ## clean both axes
    bt_utils.clean_axes(ax2, hideSpines=['left', 'top', 'right'], removeTickLabels='y')
 
-   plt.savefig('tree-matrix.png', bbox_inches='tight')\n
+   plt.savefig('tree-matrix.png', bbox_inches='tight')

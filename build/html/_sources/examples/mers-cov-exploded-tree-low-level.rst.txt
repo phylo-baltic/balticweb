@@ -1,9 +1,15 @@
 exploded tree low level
 =======================
 
-.. image:: /_static/examples/mers-cov/exploded-tree-low-level.png
+.. image:: ../_static/examples/mers-cov/exploded-tree-low-level.png
    :alt: exploded-tree-low-level
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/exploded-tree-low-level.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -81,4 +87,4 @@ Code
    ax3.set_yticklabels(['human', 'camel'])
    ax3.tick_params(size=0, labelsize=18)
 
-   plt.savefig('exploded-tree-low-level.png', bbox_inches='tight')\n
+   plt.savefig('exploded-tree-low-level.png', bbox_inches='tight')

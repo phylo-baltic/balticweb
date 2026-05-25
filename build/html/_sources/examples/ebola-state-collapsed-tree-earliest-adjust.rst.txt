@@ -1,9 +1,15 @@
 state collapsed tree earliest adjust
 ====================================
 
-.. image:: /_static/examples/ebola/state-collapsed-tree-earliest-adjust.png
+.. image:: ../_static/examples/ebola/state-collapsed-tree-earliest-adjust.png
    :alt: state-collapsed-tree-earliest-adjust
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/ebola/state-collapsed-tree-earliest-adjust.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -69,4 +75,4 @@ Code
    ax.set_xlim(bt_utils.calendar_to_decimal_date('2014-01-01'), bt_utils.calendar_to_decimal_date('2015-12-01'))
    ax.set_ylim(0, pt.ySpan)
 
-   plt.savefig('state-collapsed-tree-earliest-adjust.png', bbox_inches='tight')\n
+   plt.savefig('state-collapsed-tree-earliest-adjust.png', bbox_inches='tight')

@@ -1,9 +1,15 @@
 map tree
 ========
 
-.. image:: /_static/examples/wumv-6/map-tree.png
+.. image:: ../_static/examples/wumv-6/map-tree.png
    :alt: map-tree
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/wumv-6/map-tree.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -69,4 +75,4 @@ Code
    ax2.scatter(xs, ys, c=cs, s=50, edgecolor='none', transform=ccrs.PlateCarree(), zorder=10)
    ax2.scatter(xs, ys, c='k', s=100, edgecolor='none', transform=ccrs.PlateCarree(), zorder=9)
 
-   plt.savefig('map-tree.png', bbox_inches='tight')\n
+   plt.savefig('map-tree.png', bbox_inches='tight')

@@ -1,9 +1,15 @@
 tangled chain
 =============
 
-.. image:: /_static/examples/wumv-6/tangled-chain.png
+.. image:: ../_static/examples/wumv-6/tangled-chain.png
    :alt: tangled-chain
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/wumv-6/tangled-chain.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -55,4 +61,4 @@ Code
        ax.text(treeMiddle, treeList[0].ySpan + 1, segName, size=12, ha='center', va='bottom') ## add segment label
 
    clean_axes(ax)
-   plt.savefig('tangled-chain.png', bbox_inches='tight')\n
+   plt.savefig('tangled-chain.png', bbox_inches='tight')

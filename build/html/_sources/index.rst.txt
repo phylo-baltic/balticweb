@@ -6,3 +6,4 @@ baltic
    :hidden:
 
    examples/index
+   tutorials/index

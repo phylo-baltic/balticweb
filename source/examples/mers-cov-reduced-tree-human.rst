@@ -1,9 +1,15 @@
 reduced tree human
 ==================
 
-.. image:: /_static/examples/mers-cov/reduced-tree-human.png
+.. image:: ../_static/examples/mers-cov/reduced-tree-human.png
    :alt: reduced-tree-human
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/mers-cov/reduced-tree-human.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -68,4 +74,4 @@ Code
    ax3.set_yticklabels(['human', 'camel'])
    ax3.tick_params(size=0, labelsize=18)
 
-   plt.savefig('reduced-tree-human.png', bbox_inches='tight')\n
+   plt.savefig('reduced-tree-human.png', bbox_inches='tight')

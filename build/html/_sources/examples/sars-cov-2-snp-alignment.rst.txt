@@ -1,9 +1,15 @@
 snp alignment
 =============
 
-.. image:: /_static/examples/sars-cov-2/snp-alignment.png
+.. image:: ../_static/examples/sars-cov-2/snp-alignment.png
    :alt: snp-alignment
    :class: example-detail__hero-img
+
+.. raw:: html
+
+   <p class="example-detail__source-link">
+     <a href="../_static/examples/sars-cov-2/snp-alignment.py" download>Download python source</a>
+   </p>
 
 Code
 ----
@@ -76,4 +82,4 @@ Code
    plot_snp_alignment(alnAx=ax, treeAx=ax2, SNPs=SNPs, alnFile=alnPath, tree=ll, refSeq=refSeq, coding=True, gffFile=gffFile, refSeqFmt='gb', plotORFs=True, offsetORFs=0.2)
 
    ax2.xaxis.set_major_locator(mpl.ticker.MultipleLocator(0.0005))
-   plt.savefig('snp-alignment.png', bbox_inches='tight')\n
+   plt.savefig('snp-alignment.png', bbox_inches='tight')
