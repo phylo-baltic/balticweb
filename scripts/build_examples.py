@@ -354,6 +354,16 @@ def write_manifest(items: list[ExampleItem]) -> None:
     rel_paths = sorted({path.relative_to(PROJECT_ROOT).as_posix() for path in generated})
     MANIFEST_FILE.write_text(json.dumps({"generated": rel_paths}, indent=2) + "\n", encoding="utf-8")
 
+
+def prune_stale_pages(items: list[ExampleItem]) -> None:
+    keep = {"index.rst"}
+    keep.update(f"{item.rst_doc}.rst" for item in items)
+
+    for rst_path in EXAMPLES_DOCS.glob("*.rst"):
+        if rst_path.name not in keep:
+            rst_path.unlink()
+
+
 def main() -> None:
     ensure_dir(EXAMPLES_DOCS)
     ensure_dir(STATIC_EXAMPLES)
@@ -367,6 +377,7 @@ def main() -> None:
 
     # write landing page
     write_examples_landing(by_cat, items)
+    prune_stale_pages(items)
     write_manifest(items)
 
     print(f"Generated {len(by_cat)} categories, {len(items)} example pages.")

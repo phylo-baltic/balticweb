@@ -61,37 +61,23 @@
 <section class="grid__quicklinks">
   <ul class="quicklinks">
     <li>
-      <a href="{{ pathto('user_guide/index', 1) }}">
-        <img src="_static/images/getting-started.svg" class="quicklinks__icon dark-light"/>
-        Getting Started
-      </a>
-    </li>
-
-    <li>
-      <a href="{{ pathto('plot_types/index', 1) }}">
-        <img src="_static/images/sample-plots.svg" class="quicklinks__icon dark-light"/>
-        Plot Types
-      </a>
-    </li>
-
-    <li>
-      <a href="{{ pathto('tutorials/index', 1) }}">
+      <a href="{{ pathto('tutorials/index') }}">
         <img src="_static/images/userguide.svg" class="quicklinks__icon dark-light"/>
         Tutorials
       </a>
     </li>
 
     <li>
-      <a href="{{ pathto('examples/index', 1) }}">
+      <a href="{{ pathto('examples/index') }}">
         <img src="_static/images/cheatsheets.svg" class="quicklinks__icon dark-light"/>
         Examples
       </a>
     </li>
 
     <li>
-      <a href="{{ pathto('user_guide/index', 1) }}">
+      <a href="{{ pathto('uses/index') }}">
         <img src="_static/images/documentation.svg" class="quicklinks__icon dark-light"/>
-        Documentation
+        As seen in
       </a>
     </li>
   </ul>
@@ -129,8 +115,9 @@
   <h3>Resources</h3>
 
   <div class="callout__list">
-    <p>Read the <a href="{{ pathto('user_guide/index', 1) }}">User Guide</a> and the 
-       <a href="{{ pathto('api/index', 1) }}">API docs</a>.
+    <p>Browse the <a href="{{ pathto('examples/index') }}">Examples</a>,
+       <a href="{{ pathto('tutorials/index') }}">Tutorials</a>, and
+       <a href="{{ pathto('uses/index') }}">As seen in</a>.
     </p>
   </div>
 

@@ -7,3 +7,4 @@ baltic
 
    examples/index
    tutorials/index
+   uses/index

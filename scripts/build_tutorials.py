@@ -318,6 +318,15 @@ def write_manifest(items: list[TutorialItem]) -> None:
     MANIFEST_FILE.write_text(json.dumps({"generated": rel_paths}, indent=2) + "\n", encoding="utf-8")
 
 
+def prune_stale_pages(items: list[TutorialItem]) -> None:
+    keep = {"index.rst"}
+    keep.update(f"{item.rst_doc}.rst" for item in items)
+
+    for rst_path in TUTORIALS_DOCS.glob("*.rst"):
+        if rst_path.name not in keep:
+            rst_path.unlink()
+
+
 def main() -> None:
     ensure_dir(TUTORIALS_DOCS)
     ensure_dir(STATIC_TUTORIALS)
@@ -328,6 +337,7 @@ def main() -> None:
         write_tutorial_page(item)
 
     write_tutorials_landing(items)
+    prune_stale_pages(items)
     write_manifest(items)
 
     print(f"Generated {len(items)} tutorial pages.")

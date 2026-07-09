@@ -53,8 +53,7 @@ source_suffix = {
 html_theme_options = {
     "logo": {"text": "baltic website"},
     "secondary_sidebar_items": {
-        "index": [],  # no secondary (right) sidebar on homepage
-        "**": ["page-toc", "edit-this-page", "sourcelink"],
+        "**": [],
     },
     "show_nav_level": 0,        # only show captions
     "collapse_navigation": True,

@@ -118,6 +118,7 @@ def copy_flat_tutorial_files(source_dir: Path, dest_dir: Path) -> None:
 def run_builders() -> None:
     run([sys.executable, "scripts/build_examples.py"], cwd=PROJECT_ROOT)
     run([sys.executable, "scripts/build_tutorials.py"], cwd=PROJECT_ROOT)
+    run([sys.executable, "scripts/build_uses.py"], cwd=PROJECT_ROOT)
 
 
 def parse_args() -> argparse.Namespace:
@@ -138,7 +139,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--skip-build",
         action="store_true",
-        help="Only sync source files; do not run build_examples.py/build_tutorials.py.",
+        help="Only sync source files; do not run build_examples.py/build_tutorials.py/build_uses.py.",
     )
     parser.add_argument(
         "--dry-run",
