@@ -335,8 +335,8 @@ Each section groups examples by dataset/topic.
      </div>
    </section>
 
+
 .. toctree::
-   :caption: Ebola
    :maxdepth: 1
    :hidden:
 
@@ -348,20 +348,8 @@ Each section groups examples by dataset/topic.
    ebola-state-collapsed-tree-earliest
    ebola-state-collapsed-tree
    ebola-tmrca-hpd-tree
-
-.. toctree::
-   :caption: Influenza-B-virus
-   :maxdepth: 1
-   :hidden:
-
    influenza-b-virus-tangled-chain
    influenza-b-virus-tree-matrix
-
-.. toctree::
-   :caption: MERS-CoV
-   :maxdepth: 1
-   :hidden:
-
    mers-cov-exploded-tree-high-level
    mers-cov-exploded-tree-low-level
    mers-cov-gradient-clade
@@ -375,51 +363,21 @@ Each section groups examples by dataset/topic.
    mers-cov-skygrid-relative-time
    mers-cov-state-collapsed-tree-earliest-adjust
    mers-cov-state-collapsed-tree
-
-.. toctree::
-   :caption: nextstrain
-   :maxdepth: 1
-   :hidden:
-
    nextstrain-auspice-json-io
    nextstrain-nextstrain-avian-flu-tanglegram
    nextstrain-nextstrain-flu-lineage-map
    nextstrain-nextstrain-measles-map-piecharts
    nextstrain-nextstrain-nipah-map-piecharts
-
-.. toctree::
-   :caption: samogitia
-   :maxdepth: 1
-   :hidden:
-
    samogitia-samogitia-ebola-custom
    samogitia-samogitia-ebola-tmrca
    samogitia-samogitia-rabv-trace-state
-
-.. toctree::
-   :caption: SARS-CoV-2
-   :maxdepth: 1
-   :hidden:
-
    sars-cov-2-muller-plot-abstract
    sars-cov-2-snp-alignment
    sars-cov-2-travel-aware-tree
-
-.. toctree::
-   :caption: WuMV-6
-   :maxdepth: 1
-   :hidden:
-
    wumv-6-map-tree
    wumv-6-reassortment-network
    wumv-6-simple-tree
    wumv-6-tangled-chain
    wumv-6-tree-matrix
-
-.. toctree::
-   :caption: Zika-virus
-   :maxdepth: 1
-   :hidden:
-
    zika-virus-root-to-tip
 
