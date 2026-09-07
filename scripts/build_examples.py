@@ -284,29 +284,26 @@ def write_examples_landing(by_cat: dict[str, list[ExampleItem]], items: list[Exa
 """.strip()
         sections_html.append(section)
 
-    # Sidebar navigation grouped by category WITHOUT category index pages.
-    # Each category becomes a captioned toctree listing its examples directly.
-    toc_blocks: list[str] = []
+    # Keep one hidden toctree for the landing page sidebar, as in tutorials.
+    # Category names remain visible in the gallery while every example stays
+    # directly available from the section navigation.
+    toc_entries: list[str] = []
     for cat_slug in sorted(by_cat.keys()):
         cat_items = by_cat[cat_slug]
         if not cat_items:
             continue
 
-        cat_name = cat_items[0].category_name if cat_items else cat_slug
-        entries = "\n".join(f"   {it.rst_doc}" for it in cat_items)
+        toc_entries.extend(f"   {it.rst_doc}" for it in cat_items)
 
-        toc_blocks.append(
-            f"""\
+    toc_text = ""
+    if toc_entries:
+        toc_text = f"""
 .. toctree::
-   :caption: {cat_name}
    :maxdepth: 1
    :hidden:
 
-{entries}
+{chr(10).join(toc_entries)}
 """
-        )
-
-    toc_text = "\n".join(toc_blocks)
 
     title = "Examples"
     underline = "=" * len(title)
