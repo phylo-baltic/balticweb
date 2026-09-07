@@ -92,29 +92,6 @@
 }
 
 @media (min-width: 992px) { /* ~Bootstrap lg */
-  /* hide sidebars and let the content column use the page width */
-  .bd-sidebar-primary {
-    display: none !important;
-  }
-
-  main.bd-main {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
-  .bd-page-width {
-    max-width: 100% !important;
-  }
-
-  .bd-main .bd-content {
-    max-width: 100% !important;
-  }
-
-  .bd-main .bd-content .bd-article-container {
-    max-width: 100% !important;
-  }
-
   .bd-sidebar-secondary {
     display: none !important;
   }

@@ -62,6 +62,7 @@ html_theme_options = {
 
 html_sidebars = {
     "index": [],   # no primary (left) sidebar on homepage
+    "uses/index": [],  # no primary sidebar on the "As seen in" page
 }
 
 html_context = {}

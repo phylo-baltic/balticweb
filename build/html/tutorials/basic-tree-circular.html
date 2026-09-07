@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/css/normalize.css?v=c424da5f" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/style.css?v=c7586d3e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/style.css?v=e62f6504" />
     <link rel="stylesheet" type="text/css" href="../_static/css/examples-grid.css?v=0458020f" />
     <link rel="stylesheet" type="text/css" href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?v=f4fbef65" />
   
@@ -375,6 +375,16 @@
 <span class="n">ll</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">treeType</span> <span class="o">=</span> <span class="s1">&#39;circular&#39;</span><span class="p">)</span>
 <span class="n">ll</span><span class="o">.</span><span class="n">plot_text</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">treeType</span> <span class="o">=</span> <span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">26</span><span class="p">)</span>
 <span class="n">ll</span><span class="o">.</span><span class="n">plot_points</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">treeType</span> <span class="o">=</span> <span class="s1">&#39;circular&#39;</span><span class="p">)</span>
+
+<span class="n">scale_y</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">ySpan</span> <span class="o">*</span> <span class="mf">0.05</span>
+<span class="n">scale_start</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">treeHeight</span> <span class="o">*</span> <span class="mf">0.25</span>
+<span class="n">scale_end</span> <span class="o">=</span> <span class="n">scale_start</span> <span class="o">+</span> <span class="mf">1.0</span>
+<span class="n">scale_bar</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ll</span><span class="o">.</span><span class="n">project_circular_point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale_y</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">scale_start</span><span class="p">,</span> <span class="n">scale_end</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">scale_xs</span><span class="p">,</span> <span class="n">scale_ys</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">scale_bar</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scale_xs</span><span class="p">,</span> <span class="n">scale_ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">bt_utils</span><span class="o">.</span><span class="n">clean_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 
