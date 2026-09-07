@@ -1,0 +1,63 @@
+name: Deploy documentation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Remove local Conda prefix
+        run: sed -i '/^prefix:/d' balticweb_env.yml
+
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: balticweb_env.yml
+          activate-environment: sphinx
+          auto-activate-base: false
+          miniforge-version: latest
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        shell: bash -el {0}
+        run: |
+          python scripts/sync_upstream_content.py
+          python scripts/build_examples.py
+          python scripts/build_tutorials.py
+          python scripts/build_uses.py
+          sphinx-build -b html source build/html
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
